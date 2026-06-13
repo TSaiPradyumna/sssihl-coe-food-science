@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centre of Excellence in Food Processing & Preservation — SSSIHL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --clay:   #893507;
+    --grain:  #E8D5B0;
+    --ink:    #1A1208;
+    --smoke:  #F5F0E8;
+    --sage:   #355f42;
+    --ash:    #7A7068;
+    --rule:   #C4622D;
+    --white:  #FDFAF5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+  .display {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  /* ─── NAV ────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4vw;
+    height: 68px;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,98,45,0.25);
+    transition: background 0.3s;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nav-brand img { height: 42px; width: auto; }
+  .nav-wordmark {
+    color: var(--grain);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    max-width: 280px;
+  }
+  .nav-wordmark span { display: block; font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; color: var(--clay); margin-bottom: 2px; }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(232,213,176,0.7); text-decoration: none;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-cta {
+    background: var(--clay); color: var(--white) !important;
+    padding: 8px 20px; border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #a84e20 !important; color: var(--white) !important; }
+
+  /* ─── HERO ───────────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    background: var(--ink);
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 6vw 80px;
+  }
+
+  /* animated grain texture overlay */
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(196,98,45,0.18) 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-size: cover, 200px 200px;
+    pointer-events: none;
+  }
+
+  /* subtle horizontal rule lines */
+  #hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0px, transparent 47px,
+      rgba(196,98,45,0.06) 47px, rgba(196,98,45,0.06) 48px
+    );
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px; width: 100%;
+    display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
+  }
+  .hero-eyebrow-line {
+    width: 48px; height: 1px; background: var(--clay);
+  }
+  .hero-eyebrow .mono { color: var(--clay); }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    color: var(--white);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+  }
+  .hero-headline em {
+    color: var(--clay); font-style: normal;
+    border-bottom: 2px solid var(--clay);
+  }
+
+  .hero-subline {
+    font-size: 1.05rem; line-height: 1.75;
+    color: rgba(232,213,176,0.72);
+    max-width: 520px; margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-block; padding: 14px 32px;
+    background: var(--clay); color: var(--white);
+    text-decoration: none; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.04em;
+    text-transform: uppercase; border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #b8562a; transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-block; padding: 13px 32px;
+    border: 1px solid rgba(196,98,45,0.5); color: var(--grain);
+    text-decoration: none; font-weight: 500;
+    font-size: 0.85rem; letter-spacing: 0.04em;
+    text-transform: uppercase; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--clay); color: var(--clay); }
+
+  /* hero right: stats panel */
+  .hero-stats {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,98,45,0.2);
+    border-radius: 4px; padding: 40px 36px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .stat-item { border-left: 2px solid var(--clay); padding-left: 16px; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--ash); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* scroll indicator */
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    color: var(--ash); z-index: 2;
+  }
+  .hero-scroll .mono { font-size: 0.62rem; }
+  .scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--clay), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.7); }
+  }
+
+  /* ─── SECTION COMMONS ─────────────────────────────────────── */
+  section { padding: 100px 6vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-header { margin-bottom: 64px; }
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .section-eyebrow-line { width: 32px; height: 1px; background: var(--clay); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15; letter-spacing: -0.02em;
+  }
+  .section-intro {
+    margin-top: 20px; font-size: 1.05rem; line-height: 1.8;
+    color: var(--ash); max-width: 680px; font-weight: 300;
+  }
+
+  /* ─── MANDATE ─────────────────────────────────────────────── */
+  #mandate {
+    background: var(--smoke);
+    border-top: 1px solid rgba(61,90,70,0.15);
+    border-bottom: 1px solid rgba(61,90,70,0.15);
+  }
+  .mandate-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .mandate-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    line-height: 1.4; color: var(--ink);
+    border-left: 3px solid var(--clay);
+    padding-left: 28px;
+    margin-bottom: 36px;
+  }
+  .mandate-sub { font-size: 0.95rem; line-height: 1.8; color: var(--ash); }
+
+  .mandate-pillars { display: flex; flex-direction: column; gap: 24px; }
+  .pillar {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+    padding: 24px; background: var(--white);
+    border-radius: 3px;
+    border: 1px solid rgba(196,98,45,0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .pillar:hover { border-color: var(--clay); box-shadow: 0 4px 24px rgba(196,98,45,0.1); }
+  .pillar-icon {
+    width: 48px; height: 48px;
+    background: rgba(196,98,45,0.08);
+    border-radius: 2px; display: grid; place-items: center;
+    font-size: 1.4rem;
+  }
+  .pillar h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .pillar p { font-size: 0.82rem; color: var(--ash); line-height: 1.6; }
+
+  /* ─── DOMAINS ─────────────────────────────────────────────── */
+  #domains { background: var(--ink); }
+  #domains .section-title { color: var(--white); }
+  #domains .mono { color: var(--clay); }
+  #domains .section-eyebrow-line { background: var(--clay); }
+  #domains .section-intro { color: rgba(232,213,176,0.6); }
+
+  .domains-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2px;
+  }
+
+  .domain-card {
+    position: relative; overflow: hidden;
+    padding: 36px 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    cursor: default;
+    transition: background 0.3s, transform 0.3s;
+    min-height: 200px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .domain-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--clay); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .domain-card:hover { background: rgba(196,98,45,0.08); transform: translateY(-2px); }
+  .domain-card:hover::before { transform: scaleX(1); }
+  .domain-card.featured {
+    grid-column: span 2; background: rgba(196,98,45,0.07);
+    border-color: rgba(196,98,45,0.2);
+  }
+  .domain-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900; opacity: 0.06;
+    position: absolute; top: 16px; right: 20px; line-height: 1;
+    color: var(--white);
+  }
+  .domain-icon { font-size: 2rem; margin-bottom: 16px; }
+  .domain-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--white); margin-bottom: 10px; line-height: 1.3;
+  }
+  .domain-desc { font-size: 0.78rem; color: rgba(232,213,176,0.55); line-height: 1.6; }
+  .domain-tag {
+    margin-top: 16px; display: inline-block;
+    background: rgba(196,98,45,0.15); color: var(--clay);
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ─── INFRASTRUCTURE ──────────────────────────────────────── */
+  #infrastructure { background: var(--white); }
+
+  .infra-tabs {
+    display: flex; gap: 0; border-bottom: 2px solid rgba(196,98,45,0.15);
+    margin-bottom: 48px;
+  }
+  .tab-btn {
+    padding: 14px 28px; border: none; background: none; cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--ash);
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn.active { color: var(--clay); border-bottom-color: var(--clay); }
+  .tab-btn:hover { color: var(--ink); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .equipment-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .equip-item {
+    padding: 20px 24px;
+    border: 1px solid rgba(196,98,45,0.12);
+    border-radius: 3px; background: var(--smoke);
+    display: flex; align-items: center; gap: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .equip-item:hover { border-color: var(--clay); transform: translateX(3px); }
+  .equip-dot {
+    width: 8px; height: 8px; min-width: 8px;
+    background: var(--clay); border-radius: 50%;
+  }
+  .equip-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .equip-sub { font-size: 0.72rem; color: var(--ash); margin-top: 2px; }
+
+  .lab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .lab-card {
+    padding: 32px 28px;
+    background: var(--smoke);
+    border-radius: 4px;
+    border-top: 3px solid var(--clay);
+    transition: box-shadow 0.2s;
+  }
+  .lab-card:hover { box-shadow: 0 8px 40px rgba(196,98,45,0.1); }
+  .lab-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; margin-bottom: 12px;
+  }
+  .lab-card p { font-size: 0.82rem; color: var(--ash); line-height: 1.7; }
+  .lab-instruments {
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .chip {
+    background: rgba(196,98,45,0.08); color: var(--clay);
+    font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    border: 1px solid rgba(196,98,45,0.2);
+  }
+
+  /* ─── TRANSLATIONAL IMPACT ─────────────────────────────────── */
+  #impact { background: var(--sage); }
+  #impact .section-title { color: var(--white); }
+  #impact .mono { color: var(--grain); }
+  #impact .section-eyebrow-line { background: var(--grain); }
+  #impact .section-intro { color: rgba(232,213,176,0.75); }
+
+  .impact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  }
+  .impact-panel {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px; padding: 40px 36px;
+  }
+  .impact-panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: var(--white);
+    margin-bottom: 8px;
+  }
+  .impact-panel-sub { font-size: 0.82rem; color: rgba(232,213,176,0.6); margin-bottom: 28px; }
+
+  .service-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .service-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .service-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .service-list .icon { font-size: 1.1rem; line-height: 1; margin-top: 1px; }
+  .service-list .txt { font-size: 0.85rem; color: rgba(232,213,176,0.8); line-height: 1.5; }
+  .service-list .txt strong { color: var(--white); display: block; font-size: 0.88rem; margin-bottom: 2px; }
+
+  /* ─── REGULATORY STRIP ────────────────────────────────────── */
+  #regulatory {
+    background: var(--grain); padding: 60px 6vw;
+  }
+  .reg-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .reg-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; margin-bottom: 8px;
+  }
+  .reg-text p { font-size: 0.9rem; color: var(--ash); max-width: 480px; line-height: 1.7; }
+  .reg-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+  .badge {
+    padding: 10px 20px;
+    background: rgba(26,18,8,0.08); border: 1px solid rgba(26,18,8,0.15);
+    border-radius: 3px; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.06em; color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  /* ─── ROADMAP & METRICS ────────────────────────────────────── */
+  #roadmap { background: var(--smoke); }
+
+  .metrics-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    margin-bottom: 80px;
+  }
+  .metric-block {
+    padding: 40px 32px; background: var(--white);
+    border-top: 3px solid var(--clay); text-align: center;
+    transition: transform 0.2s;
+  }
+  .metric-block:hover { transform: translateY(-4px); }
+  .metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900; color: var(--clay);
+    line-height: 1;
+  }
+  .metric-unit { font-size: 1.2rem; vertical-align: super; font-weight: 400; }
+  .metric-label { margin-top: 12px; font-size: 0.8rem; color: var(--ash); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* timeline */
+  .timeline { position: relative; padding-left: 0; }
+  .timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: rgba(196,98,45,0.2); transform: translateX(-50%);
+  }
+  .timeline-row {
+    display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; margin-bottom: 0;
+    align-items: start;
+  }
+  .tl-left { padding: 32px 40px 32px 0; text-align: right; }
+  .tl-right { padding: 32px 0 32px 40px; }
+  .tl-node {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0; padding-top: 36px;
+  }
+  .tl-dot {
+    width: 16px; height: 16px; background: var(--clay); border-radius: 50%;
+    border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--clay);
+    flex-shrink: 0;
+  }
+  .tl-line { width: 1px; flex: 1; background: rgba(196,98,45,0.2); min-height: 60px; }
+
+  .tl-phase {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--clay); margin-bottom: 8px;
+  }
+  .tl-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; margin-bottom: 10px;
+  }
+  .tl-body { font-size: 0.82rem; color: var(--ash); line-height: 1.7; }
+
+  /* ─── COLLABORATIONS ──────────────────────────────────────── */
+  #collab { background: var(--white); padding: 80px 6vw; }
+  .collab-inner { max-width: 1200px; margin: 0 auto; }
+  .collab-types {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 48px;
+  }
+  .collab-type {
+    padding: 28px 24px;
+    border: 1px solid rgba(196,98,45,0.12);
+    border-radius: 3px;
+    text-align: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .collab-type:hover { background: var(--smoke); border-color: var(--clay); }
+  .collab-type .icon { font-size: 2rem; margin-bottom: 12px; }
+  .collab-type h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .collab-type p { font-size: 0.78rem; color: var(--ash); line-height: 1.6; }
+
+  /* ─── TRAINING ────────────────────────────────────────────── */
+  #training {
+    background: linear-gradient(135deg, var(--ink) 0%, #2c1a0a 100%);
+    padding: 80px 6vw;
+  }
+  .training-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .training-content .section-title { color: var(--white); }
+  .training-content .mono { color: var(--clay); }
+  .training-content .section-eyebrow-line { background: var(--clay); }
+  .training-content .section-intro { color: rgba(232,213,176,0.65); }
+
+  .programs { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .program-row {
+    display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+    background: rgba(255,255,255,0.04); border-radius: 3px;
+    border-left: 3px solid var(--clay);
+    transition: background 0.2s;
+  }
+  .program-row:hover { background: rgba(196,98,45,0.1); }
+  .program-name { font-size: 0.88rem; color: var(--white); font-weight: 500; }
+  .program-detail { font-size: 0.75rem; color: rgba(232,213,176,0.55); margin-top: 2px; }
+  .program-icon { font-size: 1.3rem; }
+
+  .training-visual {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(196,98,45,0.2);
+    border-radius: 4px; padding: 40px 36px;
+  }
+  .tv-heading { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: 24px; }
+  .tv-stat { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .tv-stat:last-child { border-bottom: none; }
+  .tv-stat-label { font-size: 0.82rem; color: rgba(232,213,176,0.65); }
+  .tv-stat-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--clay); }
+
+  /* ─── FOOTER ──────────────────────────────────────────────── */
+  footer {
+    background: #0e0a04; padding: 72px 6vw 32px;
+    border-top: 1px solid rgba(196,98,45,0.2);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px;
+    max-width: 1200px; margin: 0 auto 60px;
+  }
+  .footer-brand img { height: 52px; margin-bottom: 16px; }
+  .footer-tagline {
+    font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--grain);
+    line-height: 1.5; margin-bottom: 16px;
+  }
+  .footer-address { font-size: 0.78rem; color: rgba(122,112,104,0.8); line-height: 1.8; }
+
+  .footer-col h5 {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul li a {
+    font-size: 0.82rem; color: rgba(122,112,104,0.8); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--grain); }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-bottom p { font-size: 0.72rem; color: rgba(122,112,104,0.6); }
+
+  /* ─── SCROLL ANIMATIONS ───────────────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-stats { grid-template-columns: repeat(4, 1fr); }
+    .mandate-grid { grid-template-columns: 1fr; }
+    .domains-grid { grid-template-columns: repeat(2, 1fr); }
+    .domain-card.featured { grid-column: span 1; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .training-inner { grid-template-columns: 1fr; }
+    .collab-types { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .equipment-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .lab-grid { grid-template-columns: 1fr; }
+    .domains-grid { grid-template-columns: 1fr; }
+    .timeline::before { left: 24px; }
+    .timeline-row { grid-template-columns: 48px 1fr; }
+    .tl-left { display: none; }
+    .tl-node { padding-top: 36px; }
+    .metrics-row { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .collab-types { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─────────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <img src="/images/sssihl-seal.png" alt="SSSIHL Seal" onerror="this.style.display='none'">
+    <div class="nav-wordmark">
+      <span>SSSIHL · Est. 1981</span>
+      Centre of Excellence in Food Processing
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#mandate">Mandate</a></li>
+    <li><a href="#domains">Domains</a></li>
+    <li><a href="#infrastructure">Facilities</a></li>
+    <li><a href="#impact">Services</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#collab" class="nav-cta">Partner With Us</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow reveal">
+        <div class="hero-eyebrow-line"></div>
+        <span class="mono" style="color:var(--clay)">Sri Sathya Sai Institute of Higher Learning</span>
+      </div>
+      <h1 class="hero-headline reveal reveal-delay-1">
+        Where <em>Food Science</em><br>Becomes<br>Food Systems.
+      </h1>
+      <p class="hero-subline reveal reveal-delay-2">
+        The Centre of Excellence in Food Processing & Preservation bridges rigorous academic research and deployable food technology — from pilot-scale processing to shelf-life validation, from millet formulation to FSSAI-ready commercialisation.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#impact" class="btn-primary">Explore Industry Services</a>
+        <a href="#infrastructure" class="btn-outline">View Facilities</a>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal reveal-delay-2">
+      <div class="stat-item">
+        <div class="stat-num">8<span style="font-size:1.4rem;color:var(--clay)">+</span></div>
+        <div class="stat-label">Flagship Research Domains</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Fully Equipped Laboratories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">₹24L</div>
+        <div class="stat-label">ICMR-Funded Research Grant</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40<span style="font-size:1.2rem;color:var(--clay)">yr</span></div>
+        <div class="stat-label">Academic Legacy at SSSIHL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="mono">Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── MANDATE ────────────────────────────────────────────────────── -->
+<section id="mandate">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono" style="color:var(--clay)">The Mandate</span>
+      </div>
+    </div>
+
+    <div class="mandate-grid">
+      <div>
+        <p class="mandate-statement reveal">
+          "Healthcare begins with nutrition. Nutrition begins with how we grow, process, and preserve food. We exist to close that gap — at scale, with evidence."
+        </p>
+        <p class="mandate-sub reveal reveal-delay-1">
+          The department at SSSIHL has built its research identity over decades around a clear observation: India's food processing sector generates significant economic value, yet loses an estimated 30% of produce to poor preservation, inadequate processing, and fragmented quality oversight. The CoE is the institutional response to that structural inefficiency — a convergence of academic rigor, pilot-scale infrastructure, and translational intent designed to take validated food technology from bench to market.
+        </p>
+        <p class="mandate-sub reveal reveal-delay-2" style="margin-top:16px">
+          Our work cuts across three intersecting priorities: preserving the nutritional integrity of raw ingredients during processing, extending shelf life without compromising safety, and supporting the enterprises — small farms, food startups, and established processors — who need that science in a form they can actually use.
+        </p>
+      </div>
+
+      <div class="mandate-pillars">
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-icon"></div>
+          <div>
+            <h4>Research-to-Product Translation</h4>
+            <p>Every project at the CoE carries a commercialisation pathway — prototype, pilot run, regulatory preparation, and scale-up — not just a publication.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-icon"></div>
+          <div>
+            <h4>Ancient Grains. Modern Standards.</h4>
+            <p>Millets, pigmented rice varieties, and heritage legumes are the focus of our functional food work — ingredients with documented nutritional merit, now rigorously processed.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-icon"></div>
+          <div>
+            <h4>Pilot Scale. Industry Ready.</h4>
+            <p>Twelve categories of pilot-scale equipment give industry partners access to near-commercial processing conditions, without the capital burden of a dedicated facility.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-4">
+          <div class="pillar-icon"></div>
+          <div>
+            <h4>Regulatory Literacy Built In</h4>
+            <p>FSSAI compliance, HACCP frameworks, GMP documentation, and label validation are integrated at the design stage — not retrofitted after product development.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FLAGSHIP DOMAINS ──────────────────────────────────────────── -->
+<section id="domains">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Flagship Research Domains</span>
+      </div>
+      <h2 class="section-title" style="color:var(--white)">Eight Areas.<br>One Integrated Platform.</h2>
+      <p class="section-intro">
+        Each domain addresses a distinct failure point in India's food system — from grain processing economics to the regulatory complexity of functional food claims.
+      </p>
+    </div>
+
+    <div class="domains-grid reveal reveal-delay-1">
+      <div class="domain-card featured">
+        <div class="domain-num">01</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Millet & Ancient Grain Technology</div>
+        <div class="domain-desc">Decortication, flaking, extrusion, and fortification protocols for sorghum, foxtail millet, ragi, and heritage varieties. Includes bioavailability mapping and anti-nutritional factor reduction studies.</div>
+        <span class="domain-tag">Core Domain</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">02</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Dairy & Plant-Based Foods</div>
+        <div class="domain-desc">Pasteurisation optimisation, homogenisation protocols, and plant-based analogue development with sensory and nutritional equivalence validation.</div>
+        <span class="domain-tag">Active Research</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">03</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Children's Nutrition & Functional Foods</div>
+        <div class="domain-desc">Formulation of nutritionally dense, age-appropriate food products targeting iron, zinc, and protein deficiencies in early childhood.</div>
+        <span class="domain-tag">Social Impact</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">04</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Fruits & Vegetable Processing</div>
+        <div class="domain-desc">Dehydration, vacuum sealing, minimal processing, and solar-drying applications to reduce post-harvest loss and build shelf stability.</div>
+        <span class="domain-tag">Active Research</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">05</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Packaging & Shelf-Life Technology</div>
+        <div class="domain-desc">Modified atmosphere packaging, water activity modelling, headspace analysis, and packaging material evaluation for ambient and chilled distribution chains.</div>
+        <span class="domain-tag">Expansion Phase</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">06</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Food Safety, Quality & Adulteration Detection</div>
+        <div class="domain-desc">Rapid detection methodologies for common adulterants, FSSAI-aligned quality systems, and HACCP implementation support for SMEs.</div>
+        <span class="domain-tag">Expansion Phase</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">07</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Food Product Development & Commercialisation</div>
+        <div class="domain-desc">End-to-end prototype development: concept validation, sensory panel testing, nutritional profiling, regulatory dossier, and pilot-to-market scale-up planning.</div>
+        <span class="domain-tag">Industry Interface</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">08</div>
+        <div class="domain-icon"></div>
+        <div class="domain-title">Startup Incubation & Technology Transfer</div>
+        <div class="domain-desc">Structured incubation pathway from idea validation to pilot production and investor readiness, with technology licensing and transfer mechanisms.</div>
+        <span class="domain-tag">Innovation Engine</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INFRASTRUCTURE ────────────────────────────────────────────── -->
+<section id="infrastructure">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Infrastructure & Facilities</span>
+      </div>
+      <h2 class="section-title">The Equipment Doesn't Lie.</h2>
+      <p class="section-intro">
+        A CoE is only as credible as its infrastructure. Below is an accurate inventory of our pilot-scale and analytical capabilities — the physical foundation on which every research claim rests.
+      </p>
+    </div>
+
+    <div class="infra-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab(event,'pilot')">Pilot-Scale Processing</button>
+      <button class="tab-btn" onclick="switchTab(event,'labs')">Analytical Laboratories</button>
+    </div>
+
+    <div id="pilot" class="tab-panel active reveal reveal-delay-1">
+      <div class="equipment-grid">
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Extruder</div><div class="equip-sub">Twin-screw extrusion for puffed & textured products</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Ribbon Blender</div><div class="equip-sub">Homogeneous dry mixing at pilot scale</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Flaking Machine</div><div class="equip-sub">Grain flaking for breakfast and instant formats</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Pulverizer</div><div class="equip-sub">Fine milling to controlled particle sizes</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Rotary Dryer</div><div class="equip-sub">Controlled moisture reduction for shelf stability</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Roaster</div><div class="equip-sub">Dry heat treatment for flavour & microbial control</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Homogenizer</div><div class="equip-sub">Emulsion stability and particle size reduction</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Pasteurizer</div><div class="equip-sub">Thermal processing for dairy and liquid foods</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Lyophilizer</div><div class="equip-sub">Freeze-drying for high-value ingredient preservation</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Packaging Machine</div><div class="equip-sub">Heat sealing and vacuum packaging lines</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Solar Dryer</div><div class="equip-sub">Sustainable dehydration for F&V applications</div></div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-dot"></div>
+          <div><div class="equip-name">Bakery Equipment Suite</div><div class="equip-sub">OTG, convection oven, mixer, proofing chamber</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="labs" class="tab-panel">
+      <div class="lab-grid">
+        <div class="lab-card reveal">
+          <h4>Food Chemistry & Analytical Laboratory</h4>
+          <p>Proximate composition, mineral profiling, enzyme assays, fat extraction, protein analysis, and spectrophotometric characterisation of food matrices.</p>
+          <div class="lab-instruments">
+            <span class="chip">UV-Vis Spectrophotometer</span>
+            <span class="chip">Kjeltron Protein Unit</span>
+            <span class="chip">Soxtron Fat Extractor</span>
+            <span class="chip">Fibertron Fiber Analyser</span>
+            <span class="chip">Rotary Evaporator</span>
+            <span class="chip">Muffle Furnace</span>
+            <span class="chip">Varioskan Lux Reader</span>
+          </div>
+        </div>
+        <div class="lab-card reveal reveal-delay-1">
+          <h4>Food Microbiology Laboratory</h4>
+          <p>Total plate counts, pathogen detection, HACCP verification sampling, spoilage organism identification, and shelf-life challenge studies.</p>
+          <div class="lab-instruments">
+            <span class="chip">Laminar Air Flow</span>
+            <span class="chip">BOD Incubator</span>
+            <span class="chip">Autoclave</span>
+            <span class="chip">Olympus Trinocular Scope</span>
+            <span class="chip">Colony Counter</span>
+          </div>
+        </div>
+        <div class="lab-card reveal reveal-delay-2">
+          <h4>Food Quality Control Laboratory</h4>
+          <p>Rheological profiling, water activity measurement, colour analysis, headspace gas composition, and texture determination for product QC documentation.</p>
+          <div class="lab-instruments">
+            <span class="chip">Water Activity Meter</span>
+            <span class="chip">Brookfield Viscometer</span>
+            <span class="chip">Dansensor Headspace</span>
+            <span class="chip">Konica Minolta Colour</span>
+            <span class="chip">Bostwick Consistometer</span>
+          </div>
+        </div>
+        <div class="lab-card reveal reveal-delay-3">
+          <h4>Food Processing & Technology Laboratory</h4>
+          <p>Dehydration studies, oil expression, sieve analysis, penetration testing, and applied processing experiments at gram-to-kilogram scale.</p>
+          <div class="lab-instruments">
+            <span class="chip">Ezidri Dehydrator</span>
+            <span class="chip">Gyratory Sieve Shaker</span>
+            <span class="chip">Piteba Oil Expeller</span>
+            <span class="chip">Gerber Centrifuge</span>
+            <span class="chip">Penetrometer</span>
+          </div>
+        </div>
+        <div class="lab-card reveal">
+          <h4>Sensory Evaluation & Product Development Kitchen</h4>
+          <p>Structured consumer panel trials, triangle tests, hedonic scaling, and iterative product development in a controlled, commercial-grade kitchen setting.</p>
+          <div class="lab-instruments">
+            <span class="chip">Induction & Gas Ranges</span>
+            <span class="chip">Food Processors</span>
+            <span class="chip">Commercial Blenders</span>
+            <span class="chip">Precision Balances</span>
+          </div>
+        </div>
+        <div class="lab-card reveal reveal-delay-1">
+          <h4>Nutritional Biochemistry Laboratory</h4>
+          <p>In-vitro bioavailability assays, antioxidant activity, glycaemic index profiling, and metabolomic characterisation of food bioactives.</p>
+          <div class="lab-instruments">
+            <span class="chip">Fluorimeter</span>
+            <span class="chip">Semi-auto Biochemistry Analyser</span>
+            <span class="chip">Tissue Homogenizer</span>
+            <span class="chip">Microcentrifuge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRANSLATIONAL IMPACT ──────────────────────────────────────── -->
+<section id="impact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Translational Impact</span>
+      </div>
+      <h2 class="section-title" style="color:var(--white)">Research That Pays Its Way.</h2>
+      <p class="section-intro">
+        Industry partnerships, startup incubation, and contract R&D are not afterthoughts. They are the operational proof that the science is working.
+      </p>
+    </div>
+
+    <div class="impact-grid reveal reveal-delay-1">
+      <div class="impact-panel">
+        <div class="impact-panel-title">Industry Support Services</div>
+        <div class="impact-panel-sub">For food manufacturers, processors, and agri-enterprises</div>
+        <ul class="service-list">
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Product Formulation</strong>From raw ingredient selection to final recipe with nutritional and sensory profiling.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Process Optimisation</strong>Temperature-time profiling, yield improvement, and energy efficiency analysis across unit operations.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Shelf-Life Studies</strong>Accelerated stability testing with water activity, microbial load, and sensory degradation tracking.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Scale-Up Support</strong>Bench-to-pilot-to-plant transition planning with equipment matching and process transfer documentation.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Contract R&D</strong>Defined-scope research engagements with IP agreement frameworks and milestone-based delivery.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Technology Transfer</strong>Licensed transfer of developed processing protocols and product formulations to manufacturing partners.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="impact-panel">
+        <div class="impact-panel-title">Startup & Incubation Pathway</div>
+        <div class="impact-panel-sub">For food-tech founders, agri-entrepreneurs, and innovators</div>
+        <ul class="service-list">
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Idea Validation</strong>Rapid feasibility assessment of product concepts against market, regulatory, and processing constraints.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Prototype Development</strong>Lab-scale product creation with nutritional characterisation and sensory testing across three iteration cycles.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Pilot Production Runs</strong>Access to CoE pilot equipment for batch production, process documentation, and investor demos.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Regulatory Guidance</strong>FSSAI registration support, label compliance review, and food safety system design from the ground up.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Market Testing Support</strong>Structured consumer panel recruitment and feedback analysis for pre-launch validation.</div>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <div class="txt"><strong>Investor Connections</strong>Facilitated introductions to agri-food focused investors, grant bodies, and accelerator networks.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REGULATORY STRIP ──────────────────────────────────────────── -->
+<section id="regulatory">
+  <div class="reg-inner">
+    <div class="reg-text reveal">
+      <h3>Compliant from Day One</h3>
+      <p>Regulatory readiness is not a final step. It is the frame within which product development happens at this CoE — because a product that cannot be sold is not a product.</p>
+    </div>
+    <div class="reg-badges reveal reveal-delay-1">
+      <div class="badge">FSSAI Compliance</div>
+      <div class="badge">HACCP Systems</div>
+      <div class="badge">GMP Implementation</div>
+      <div class="badge">Label Validation</div>
+      <div class="badge">Export Compliance</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ROADMAP & METRICS ─────────────────────────────────────────── -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Roadmap & Impact Targets</span>
+      </div>
+      <h2 class="section-title">Five Years. Measurable Outcomes.</h2>
+      <p class="section-intro">
+        The CoE operates on a defined three-phase growth plan. Below are the milestones by which we expect to be evaluated.
+      </p>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-block reveal">
+        <div class="metric-num">100<span class="metric-unit">+</span></div>
+        <div class="metric-label">Startups Supported by Year 5</div>
+      </div>
+      <div class="metric-block reveal reveal-delay-1">
+        <div class="metric-num">50<span class="metric-unit">+</span></div>
+        <div class="metric-label">New Food Products Developed</div>
+      </div>
+      <div class="metric-block reveal reveal-delay-2">
+        <div class="metric-num">20<span class="metric-unit">+</span></div>
+        <div class="metric-label">Technologies Transferred to Industry</div>
+      </div>
+      <div class="metric-block reveal reveal-delay-3">
+        <div class="metric-num">500<span class="metric-unit">+</span></div>
+        <div class="metric-label">Professionals Trained per Year</div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="tl-left reveal">
+          <div class="tl-phase">Phase 1</div>
+          <div class="tl-heading">Consolidation & Core Strengths</div>
+          <div class="tl-body">Formalise pilot-scale infrastructure. Deepen Millet & Ancient Grain Technology research. Launch Dairy Technology initiative. Establish Packaging Evaluation Lab and first industry partnership cohort.</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right reveal reveal-delay-1">
+          <div class="tl-phase" style="color:var(--ash)">Year 1 – 2</div>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="tl-left reveal">
+          <div class="tl-phase" style="color:var(--ash)">Year 3 – 4</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right reveal reveal-delay-1">
+          <div class="tl-phase">Phase 2</div>
+          <div class="tl-heading">Expansion & National Reach</div>
+          <div class="tl-body">Create the Food Safety & Adulteration Detection Centre. Launch national-level training programmes in certified food processing. Establish three active FPO partnerships. Begin contract R&D services with external food industry clients.</div>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="tl-left reveal">
+          <div class="tl-phase">Phase 3</div>
+          <div class="tl-heading">Global Food Innovation Hub</div>
+          <div class="tl-body">Achieve recognition as a Tier-1 food innovation centre in South Asia. Operate a functioning startup portfolio of 100+ alumni. Establish international research collaborations. Generate export-ready food technologies with documented IP.</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right reveal reveal-delay-1">
+          <div class="tl-phase" style="color:var(--ash)">Year 5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COLLABORATIONS ────────────────────────────────────────────── -->
+<section id="collab">
+  <div class="collab-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Collaborations & Partnerships</span>
+      </div>
+      <h2 class="section-title">We Work at the Intersection.</h2>
+      <p class="section-intro" style="max-width:600px">
+        The CoE's relevance depends on active engagement with the systems it aims to improve. We seek structured partnerships across four categories.
+      </p>
+    </div>
+
+    <div class="collab-types">
+      <div class="collab-type reveal">
+        <div class="icon"></div>
+        <h4>Academic Institutions</h4>
+        <p>Joint PhD programmes, faculty exchange, and co-authored research with universities and agricultural research institutes.</p>
+      </div>
+      <div class="collab-type reveal reveal-delay-1">
+        <div class="icon"></div>
+        <h4>Food Industry Partners</h4>
+        <p>Contract R&D, process consultancy, and technology licensing with food processors, FMCG manufacturers, and ingredient suppliers.</p>
+      </div>
+      <div class="collab-type reveal reveal-delay-2">
+        <div class="icon"></div>
+        <h4>Farmer Producer Organisations</h4>
+        <p>Primary processing support, post-harvest technology transfer, and product development for farmer-owned aggregation bodies.</p>
+      </div>
+      <div class="collab-type reveal reveal-delay-3">
+        <div class="icon"></div>
+        <h4>Government & Funding Bodies</h4>
+        <p>Sponsored research engagements with ICMR, DBT, DST, ICAR, and state-level food processing development corporations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRAINING ──────────────────────────────────────────────────── -->
+<section id="training">
+  <div class="training-inner">
+    <div class="training-content">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-line"></div>
+        <span class="mono">Training & Skill Development</span>
+      </div>
+      <h2 class="section-title reveal reveal-delay-1">Knowledge That Transfers.</h2>
+      <p class="section-intro reveal reveal-delay-2">
+        Producing graduates who understand food science is not enough. The CoE runs structured development programmes for working professionals, industry teams, and aspiring food entrepreneurs.
+      </p>
+
+      <div class="programs reveal reveal-delay-2">
+        <div class="program-row">
+          <span class="program-icon"></span>
+          <div><div class="program-name">Food Processing Technology Workshops</div><div class="program-detail">Short-term, lab-intensive modules covering unit operations and quality control</div></div>
+        </div>
+        <div class="program-row">
+          <span class="program-icon"></span>
+          <div><div class="program-name">Millet Technology Certification</div><div class="program-detail">Industry-recognised certification in millet processing, formulation, and commercialisation</div></div>
+        </div>
+        <div class="program-row">
+          <span class="program-icon"></span>
+          <div><div class="program-name">Food Entrepreneurship Development</div><div class="program-detail">Business model, regulatory navigation, and pitch preparation for food-tech founders</div></div>
+        </div>
+        <div class="program-row">
+          <span class="program-icon"></span>
+          <div><div class="program-name">Industry Immersion Internships</div><div class="program-detail">Structured 4–12 week internships with defined R&D deliverables and mentorship</div></div>
+        </div>
+        <div class="program-row">
+          <span class="program-icon"></span>
+          <div><div class="program-name">FSSAI & Regulatory Readiness Programmes</div><div class="program-detail">Compliance training for food business operators, designed around current FSSAI standards</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="training-visual reveal reveal-delay-2">
+      <div class="tv-heading">Target Capacity — Year 5</div>
+      <div class="tv-stat">
+        <span class="tv-stat-label">Annual Training Throughput</span>
+        <span class="tv-stat-val">500+ professionals</span>
+      </div>
+      <div class="tv-stat">
+        <span class="tv-stat-label">Certification Tracks</span>
+        <span class="tv-stat-val">5 active programmes</span>
+      </div>
+      <div class="tv-stat">
+        <span class="tv-stat-label">Internship Placements / Year</span>
+        <span class="tv-stat-val">40+ students</span>
+      </div>
+      <div class="tv-stat">
+        <span class="tv-stat-label">Industry Workshops / Year</span>
+        <span class="tv-stat-val">12+ events</span>
+      </div>
+      <div class="tv-stat">
+        <span class="tv-stat-label">Target FPO Partners Trained</span>
+        <span class="tv-stat-val">25+ organisations</span>
+      </div>
+      <div style="margin-top:28px; padding:20px; background:rgba(196,98,45,0.1); border-radius:3px; border-left:3px solid var(--clay)">
+        <div style="font-size:0.78rem;color:rgba(232,213,176,0.6);line-height:1.7">The department currently offers M.Sc. and Ph.D. programmes in Food & Nutritional Sciences, with active doctoral research scholars publishing in peer-reviewed journals and qualifying in UGC-NET.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="sssihl-logo.png" alt="SSSIHL Logo" style="height:52px;width:auto" onerror="this.style.display='none'">
+      <p class="footer-tagline">Centre of Excellence in Food Processing & Preservation</p>
+      <p class="footer-address">
+        Department of Food & Nutritional Sciences<br>
+        Sri Sathya Sai Institute of Higher Learning<br>
+        Prasanthi Nilayam, Puttaparthi<br>
+        Andhra Pradesh – 515134, India
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Research</h5>
+      <ul>
+        <li><a href="#domains">Flagship Domains</a></li>
+        <li><a href="#">Ongoing Projects</a></li>
+        <li><a href="#">Publications</a></li>
+        <li><a href="#">Faculty Expertise</a></li>
+        <li><a href="#">Doctoral Research</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#impact">Industry R&D</a></li>
+        <li><a href="#impact">Startup Incubation</a></li>
+        <li><a href="#training">Training Programmes</a></li>
+        <li><a href="#regulatory">Regulatory Support</a></li>
+        <li><a href="#infrastructure">Lab Access</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="https://www.sssihl.edu.in/departments/food-nutritional-sciences/" target="_blank">SSSIHL Department Page</a></li>
+        <li><a href="#collab">Partnership Enquiries</a></li>
+        <li><a href="#">Internship Applications</a></li>
+        <li><a href="#">Media & Press</a></li>
+        <li><a href="#">Academic Collaborations</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Centre of Excellence in Food Processing & Preservation, SSSIHL. All rights reserved.</p>
+    <p style="color:rgba(122,112,104,0.4)">Part of the Sri Sathya Sai Institute of Higher Learning, Puttaparthi</p>
+  </div>
+</footer>
+
+<script>
+  // ─── TAB SWITCHING ────────────────────────────────────────────
+  function switchTab(e, panelId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  // ─── SCROLL REVEAL ────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ─── NAV SHRINK ON SCROLL ─────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.height = '56px';
+      nav.style.borderBottomColor = 'rgba(196,98,45,0.35)';
+    } else {
+      nav.style.height = '68px';
+      nav.style.borderBottomColor = 'rgba(196,98,45,0.25)';
+    }
+  }, { passive: true });
+
+  // ─── METRIC COUNT-UP ──────────────────────────────────────────
+  function countUp(el, target, suffix, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const run = () => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start) + suffix;
+      if (start < target) requestAnimationFrame(run);
+    };
+    requestAnimationFrame(run);
+  }
+
+  const metricObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.metric-num');
+        nums.forEach(n => {
+          const full = n.textContent;
+          const match = full.match(/(\d+)/);
+          if (match) {
+            const val = parseInt(match[1]);
+            const suffix = full.replace(/\d+/, '') ;
+            countUp(n, val, suffix, 1200);
+          }
+        });
+        metricObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const metricsRow = document.querySelector('.metrics-row');
+  if (metricsRow) metricObs.observe(metricsRow);
+</script>
+</body>
+</html>
