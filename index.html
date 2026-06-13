@@ -8,14 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --clay:   #1A1A1A;
-    --grain:  #F0F0F0;
-    --ink:    #FFFFFF;
-    --smoke:  #F7F7F7;
-    --sage:   #2B2B2B;
-    --ash:    #6B6B6B;
-    --rule:   #1A1A1A;
-    --white:  #FFFFFF;
+    --paper:   #FAF9F6;   /* warm parchment background */
+    --surface: #FFFFFF;   /* card / panel surface */
+    --panel:   #F1EEE7;   /* slightly deeper parchment for section blocks */
+    --sage:    #C9D5B5;   /* pastel sage - structural fills */
+    --sage-deep:#5E8C61;  /* forest green - accent / links / CTA */
+    --tan:     #E6CCB2;   /* pale tan - secondary accent */
+    --ink:     #3A3A3A;   /* charcoal body text */
+    --ash:     #7A7670;   /* muted secondary text */
+    --line:    rgba(58,58,58,0.12);
+    --white:   #FFFFFF;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,8 +26,8 @@
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
-    background: var(--white);
-    color: #111111;
+    background: var(--paper);
+    color: var(--ink);
     overflow-x: hidden;
   }
 
@@ -42,149 +44,147 @@
     text-transform: uppercase;
   }
 
+  img { display: block; max-width: 100%; }
+
   /* ─── NAV ────────────────────────────────────────────────── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 900;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 4vw;
     height: 68px;
-    background: rgba(255,255,255,0.92);
+    background: rgba(250,249,246,0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(26,26,26,0.12);
-    transition: background 0.3s;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s, height 0.3s;
   }
   .nav-brand {
     display: flex; align-items: center; gap: 14px;
   }
-  .nav-brand img { height: 42px; width: auto; }
+  .nav-brand img { height: 42px; width: auto; border-radius: 0; }
   .nav-wordmark {
-    color: #111111;
+    color: var(--ink);
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
     line-height: 1.25;
     max-width: 280px;
   }
-  .nav-wordmark span { display: block; font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; color: var(--clay); margin-bottom: 2px; }
+  .nav-wordmark span { display: block; font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; color: var(--sage-deep); margin-bottom: 2px; }
   .nav-links {
     display: flex; gap: 2.5rem; list-style: none;
   }
   .nav-links a {
-    color: rgba(26,26,26,0.65); text-decoration: none;
+    color: rgba(58,58,58,0.65); text-decoration: none;
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
     text-transform: uppercase; transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--clay); }
+  .nav-links a:hover { color: var(--sage-deep); }
   .nav-cta {
-    background: var(--clay); color: var(--white) !important;
-    padding: 8px 20px; border-radius: 2px;
+    background: var(--sage-deep); color: var(--white) !important;
+    padding: 8px 20px; border-radius: 3px;
     transition: background 0.2s !important;
   }
-  .nav-cta:hover { background: #3a3a3a !important; color: var(--white) !important; }
+  .nav-cta:hover { background: #4c7350 !important; color: var(--white) !important; }
 
   /* ─── HERO ───────────────────────────────────────────────── */
   #hero {
     min-height: 100vh;
-    background: var(--white);
+    background: var(--paper);
     display: grid; place-items: center;
     position: relative; overflow: hidden;
     padding: 120px 6vw 80px;
-    border-bottom: 1px solid rgba(26,26,26,0.08);
+    border-bottom: 1px solid var(--line);
   }
 
-  /* animated grain texture overlay */
   #hero::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
-      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26,26,26,0.04) 0%, transparent 70%),
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-    background-size: cover, 200px 200px;
-    pointer-events: none;
-  }
-
-  /* subtle horizontal rule lines */
-  #hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      180deg,
-      transparent 0px, transparent 47px,
-      rgba(26,26,26,0.04) 47px, rgba(26,26,26,0.04) 48px
-    );
+      radial-gradient(ellipse 70% 55% at 75% 30%, rgba(201,213,181,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 10% 85%, rgba(230,204,178,0.30) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .hero-inner {
     position: relative; z-index: 2;
-    max-width: 1200px; width: 100%;
-    display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+    max-width: 1240px; width: 100%;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center;
   }
 
   .hero-eyebrow {
     display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
   }
   .hero-eyebrow-line {
-    width: 48px; height: 1px; background: var(--clay);
+    width: 48px; height: 1px; background: var(--sage-deep);
   }
-  .hero-eyebrow .mono { color: var(--clay); }
+  .hero-eyebrow .mono { color: var(--sage-deep); }
 
   .hero-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 5.5vw, 5.2rem);
-    color: #111111;
-    line-height: 1.06;
-    letter-spacing: -0.025em;
-    margin-bottom: 32px;
+    font-size: clamp(2.6rem, 5vw, 4.6rem);
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
   }
   .hero-headline em {
-    color: var(--clay); font-style: normal;
-    border-bottom: 2px solid var(--clay);
+    color: var(--sage-deep); font-style: normal;
+    border-bottom: 2px solid var(--sage);
   }
 
   .hero-subline {
     font-size: 1.05rem; line-height: 1.75;
-    color: #4a4a4a;
-    max-width: 520px; margin-bottom: 48px;
+    color: var(--ash);
+    max-width: 520px; margin-bottom: 40px;
     font-weight: 300;
   }
 
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
 
   .btn-primary {
     display: inline-block; padding: 14px 32px;
-    background: var(--clay); color: var(--white);
+    background: var(--sage-deep); color: var(--white);
     text-decoration: none; font-weight: 600;
     font-size: 0.85rem; letter-spacing: 0.04em;
-    text-transform: uppercase; border-radius: 2px;
+    text-transform: uppercase; border-radius: 3px;
     transition: background 0.2s, transform 0.2s;
   }
-  .btn-primary:hover { background: #3a3a3a; transform: translateY(-1px); }
+  .btn-primary:hover { background: #4c7350; transform: translateY(-1px); }
 
   .btn-outline {
     display: inline-block; padding: 13px 32px;
-    border: 1px solid rgba(26,26,26,0.3); color: #111111;
+    border: 1px solid rgba(58,58,58,0.25); color: var(--ink);
     text-decoration: none; font-weight: 500;
     font-size: 0.85rem; letter-spacing: 0.04em;
-    text-transform: uppercase; border-radius: 2px;
+    text-transform: uppercase; border-radius: 3px;
     transition: border-color 0.2s, color 0.2s;
   }
-  .btn-outline:hover { border-color: var(--clay); color: var(--clay); }
+  .btn-outline:hover { border-color: var(--sage-deep); color: var(--sage-deep); }
 
-  /* hero right: stats panel */
-  .hero-stats {
-    background: var(--smoke);
-    border: 1px solid rgba(26,26,26,0.1);
-    border-radius: 4px; padding: 40px 36px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  /* hero right: image + stats */
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 24px;
   }
-  .stat-item { border-left: 2px solid var(--clay); padding-left: 16px; }
+  .hero-image {
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 4/3;
+  }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .hero-stats {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px; padding: 28px 28px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .stat-item { border-left: 2px solid var(--sage-deep); padding-left: 16px; }
   .stat-num {
     font-family: 'Playfair Display', serif;
-    font-size: 2.6rem; font-weight: 700;
-    color: #111111; line-height: 1;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--ink); line-height: 1;
     margin-bottom: 6px;
   }
-  .stat-label { font-size: 0.72rem; color: var(--ash); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-label { font-size: 0.7rem; color: var(--ash); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
 
   /* scroll indicator */
   .hero-scroll {
@@ -194,7 +194,7 @@
   }
   .hero-scroll .mono { font-size: 0.62rem; }
   .scroll-line {
-    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--clay), transparent);
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--sage-deep), transparent);
     animation: scrollPulse 2s infinite;
   }
   @keyframes scrollPulse {
@@ -210,12 +210,12 @@
   .section-eyebrow {
     display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
   }
-  .section-eyebrow-line { width: 32px; height: 1px; background: var(--clay); }
+  .section-eyebrow-line { width: 32px; height: 1px; background: var(--sage-deep); }
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 3.5vw, 3rem);
     line-height: 1.15; letter-spacing: -0.02em;
-    color: #111111;
+    color: var(--ink);
   }
   .section-intro {
     margin-top: 20px; font-size: 1.05rem; line-height: 1.8;
@@ -224,102 +224,130 @@
 
   /* ─── MANDATE ─────────────────────────────────────────────── */
   #mandate {
-    background: var(--smoke);
-    border-top: 1px solid rgba(26,26,26,0.08);
-    border-bottom: 1px solid rgba(26,26,26,0.08);
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
   .mandate-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
   }
   .mandate-statement {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
-    line-height: 1.4; color: #111111;
-    border-left: 3px solid var(--clay);
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    line-height: 1.45; color: var(--ink);
+    border-left: 3px solid var(--sage-deep);
     padding-left: 28px;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
   .mandate-sub { font-size: 0.95rem; line-height: 1.8; color: var(--ash); }
 
-  .mandate-pillars { display: flex; flex-direction: column; gap: 24px; }
+  .mandate-image {
+    border-radius: 6px; overflow: hidden; border: 1px solid var(--line);
+    margin-top: 28px; aspect-ratio: 16/9;
+  }
+  .mandate-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .mandate-pillars { display: flex; flex-direction: column; gap: 20px; }
   .pillar {
     display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
-    padding: 24px; background: var(--white);
-    border-radius: 3px;
-    border: 1px solid rgba(26,26,26,0.08);
+    padding: 22px; background: var(--surface);
+    border-radius: 4px;
+    border: 1px solid var(--line);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .pillar:hover { border-color: var(--clay); box-shadow: 0 4px 24px rgba(26,26,26,0.08); }
+  .pillar:hover { border-color: var(--sage-deep); box-shadow: 0 4px 20px rgba(94,140,97,0.10); }
   .pillar-icon {
     width: 48px; height: 48px;
-    background: rgba(26,26,26,0.05);
-    border-radius: 2px; display: grid; place-items: center;
-    font-size: 1.4rem;
+    background: var(--sage);
+    border-radius: 4px; display: grid; place-items: center;
+    font-size: 1.3rem;
   }
-  .pillar h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: #111111; }
+  .pillar h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
   .pillar p { font-size: 0.82rem; color: var(--ash); line-height: 1.6; }
 
   /* ─── DOMAINS ─────────────────────────────────────────────── */
-  #domains { background: var(--white); border-top: 1px solid rgba(26,26,26,0.08); border-bottom: 1px solid rgba(26,26,26,0.08); }
-  #domains .section-title { color: #111111; }
-  #domains .mono { color: var(--clay); }
-  #domains .section-eyebrow-line { background: var(--clay); }
+  #domains { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  #domains .section-title { color: var(--ink); }
+  #domains .mono { color: var(--sage-deep); }
+  #domains .section-eyebrow-line { background: var(--sage-deep); }
   #domains .section-intro { color: var(--ash); }
 
   .domains-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto;
-    gap: 2px;
-    background: rgba(26,26,26,0.08);
+    gap: 14px;
   }
 
   .domain-card {
     position: relative; overflow: hidden;
-    padding: 36px 28px;
-    background: var(--white);
-    border: 1px solid rgba(26,26,26,0.06);
+    padding: 28px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
     cursor: default;
-    transition: background 0.3s, transform 0.3s;
-    min-height: 200px;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    min-height: 210px;
     display: flex; flex-direction: column; justify-content: flex-end;
   }
   .domain-card::before {
     content: '';
     position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-    background: var(--clay); transform: scaleX(0); transform-origin: left;
+    background: var(--sage-deep); transform: scaleX(0); transform-origin: left;
     transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
   }
-  .domain-card:hover { background: var(--smoke); transform: translateY(-2px); }
+  .domain-card:hover { background: var(--panel); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(58,58,58,0.06); }
   .domain-card:hover::before { transform: scaleX(1); }
   .domain-card.featured {
-    grid-column: span 2; background: var(--smoke);
-    border-color: rgba(26,26,26,0.1);
+    grid-column: span 2; min-height: 210px;
+    padding: 0; display: block;
   }
+  .featured-content {
+    padding: 28px 24px;
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; z-index: 2;
+  }
+  .featured-image {
+    position: absolute; inset: 0; z-index: 1;
+  }
+  .featured-image img { width: 100%; height: 100%; object-fit: cover; }
+  .featured-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(250,249,246,0.15) 0%, rgba(34,30,22,0.78) 100%);
+  }
+  .domain-card.featured .domain-title,
+  .domain-card.featured .domain-desc { color: var(--white); }
+  .domain-card.featured .domain-desc { color: rgba(255,255,255,0.82); }
+  .domain-card.featured .domain-num { color: var(--white); opacity: 0.18; }
+  .domain-card.featured .domain-tag { background: rgba(255,255,255,0.18); color: var(--white); }
+
   .domain-num {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem; font-weight: 900; opacity: 0.05;
+    font-size: 3.5rem; font-weight: 900; opacity: 0.06;
     position: absolute; top: 16px; right: 20px; line-height: 1;
-    color: #111111;
+    color: var(--ink);
   }
   .domain-icon { font-size: 2rem; margin-bottom: 16px; }
   .domain-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem; color: #111111; margin-bottom: 10px; line-height: 1.3;
+    font-size: 1.05rem; color: var(--ink); margin-bottom: 10px; line-height: 1.3;
   }
   .domain-desc { font-size: 0.78rem; color: var(--ash); line-height: 1.6; }
   .domain-tag {
     margin-top: 16px; display: inline-block;
-    background: rgba(26,26,26,0.06); color: var(--clay);
+    background: var(--sage); color: var(--sage-deep);
     font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 2px;
+    font-weight: 600;
   }
 
   /* ─── INFRASTRUCTURE ──────────────────────────────────────── */
-  #infrastructure { background: var(--white); }
+  #infrastructure { background: var(--paper); }
 
   .infra-tabs {
-    display: flex; gap: 0; border-bottom: 2px solid rgba(26,26,26,0.1);
+    display: flex; gap: 0; border-bottom: 2px solid var(--line);
     margin-bottom: 48px;
   }
   .tab-btn {
@@ -330,123 +358,134 @@
     border-bottom: 2px solid transparent; margin-bottom: -2px;
     transition: color 0.2s, border-color 0.2s;
   }
-  .tab-btn.active { color: var(--clay); border-bottom-color: var(--clay); }
-  .tab-btn:hover { color: #111111; }
+  .tab-btn.active { color: var(--sage-deep); border-bottom-color: var(--sage-deep); }
+  .tab-btn:hover { color: var(--ink); }
 
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
+  .infra-layout {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start;
+  }
+  .infra-image {
+    border-radius: 6px; overflow: hidden; border: 1px solid var(--line);
+    position: sticky; top: 100px; aspect-ratio: 3/4;
+  }
+  .infra-image img { width: 100%; height: 100%; object-fit: cover; }
+
   .equipment-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
   }
   .equip-item {
-    padding: 20px 24px;
-    border: 1px solid rgba(26,26,26,0.1);
-    border-radius: 3px; background: var(--smoke);
-    display: flex; align-items: center; gap: 16px;
-    transition: border-color 0.2s, transform 0.2s;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 4px; background: var(--surface);
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color 0.2s, transform 0.2s, background 0.2s;
   }
-  .equip-item:hover { border-color: var(--clay); transform: translateX(3px); }
+  .equip-item:hover { border-color: var(--sage-deep); transform: translateX(3px); background: var(--panel); }
   .equip-dot {
     width: 8px; height: 8px; min-width: 8px;
-    background: var(--clay); border-radius: 50%;
+    background: var(--sage-deep); border-radius: 50%;
   }
-  .equip-name { font-size: 0.88rem; font-weight: 500; color: #111111; }
+  .equip-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
   .equip-sub { font-size: 0.72rem; color: var(--ash); margin-top: 2px; }
 
-  .lab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .lab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .lab-card {
-    padding: 32px 28px;
-    background: var(--smoke);
-    border-radius: 4px;
-    border-top: 3px solid var(--clay);
+    padding: 26px 24px;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--sage-deep);
     transition: box-shadow 0.2s;
   }
-  .lab-card:hover { box-shadow: 0 8px 40px rgba(26,26,26,0.08); }
+  .lab-card:hover { box-shadow: 0 8px 28px rgba(58,58,58,0.06); }
   .lab-card h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem; margin-bottom: 12px; color: #111111;
+    font-size: 1.02rem; margin-bottom: 10px; color: var(--ink);
   }
-  .lab-card p { font-size: 0.82rem; color: var(--ash); line-height: 1.7; }
+  .lab-card p { font-size: 0.8rem; color: var(--ash); line-height: 1.7; }
   .lab-instruments {
-    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
   }
   .chip {
-    background: rgba(26,26,26,0.05); color: var(--clay);
-    font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase;
+    background: var(--sage); color: #3f5e42;
+    font-size: 0.63rem; letter-spacing: 0.05em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 2px;
-    border: 1px solid rgba(26,26,26,0.12);
+    border: 1px solid rgba(94,140,97,0.2);
+    font-weight: 600;
   }
 
   /* ─── TRANSLATIONAL IMPACT ─────────────────────────────────── */
-  #impact { background: var(--smoke); border-top: 1px solid rgba(26,26,26,0.08); border-bottom: 1px solid rgba(26,26,26,0.08); }
-  #impact .section-title { color: #111111; }
-  #impact .mono { color: var(--clay); }
-  #impact .section-eyebrow-line { background: var(--clay); }
+  #impact { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  #impact .section-title { color: var(--ink); }
+  #impact .mono { color: var(--sage-deep); }
+  #impact .section-eyebrow-line { background: var(--sage-deep); }
   #impact .section-intro { color: var(--ash); }
 
   .impact-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
   }
   .impact-panel {
-    background: var(--white);
-    border: 1px solid rgba(26,26,26,0.08);
-    border-radius: 4px; padding: 40px 36px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px; padding: 36px 32px;
   }
   .impact-panel-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; color: #111111;
+    font-size: 1.35rem; color: var(--ink);
     margin-bottom: 8px;
   }
-  .impact-panel-sub { font-size: 0.82rem; color: var(--ash); margin-bottom: 28px; }
+  .impact-panel-sub { font-size: 0.82rem; color: var(--ash); margin-bottom: 26px; }
 
   .service-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
   .service-list li {
     display: flex; align-items: flex-start; gap: 14px;
-    padding-bottom: 14px; border-bottom: 1px solid rgba(26,26,26,0.06);
+    padding-bottom: 14px; border-bottom: 1px solid var(--line);
   }
   .service-list li:last-child { border-bottom: none; padding-bottom: 0; }
-  .service-list .icon { font-size: 1.1rem; line-height: 1; margin-top: 1px; }
+  .service-list .icon { font-size: 1.1rem; line-height: 1; margin-top: 1px; color: var(--sage-deep); }
   .service-list .txt { font-size: 0.85rem; color: var(--ash); line-height: 1.5; }
-  .service-list .txt strong { color: #111111; display: block; font-size: 0.88rem; margin-bottom: 2px; }
+  .service-list .txt strong { color: var(--ink); display: block; font-size: 0.88rem; margin-bottom: 2px; }
 
   /* ─── REGULATORY STRIP ────────────────────────────────────── */
   #regulatory {
-    background: var(--white); padding: 60px 6vw;
-    border-bottom: 1px solid rgba(26,26,26,0.08);
+    background: var(--paper); padding: 56px 6vw;
+    border-bottom: 1px solid var(--line);
   }
   .reg-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
   .reg-text h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; margin-bottom: 8px; color: #111111;
+    font-size: 1.5rem; margin-bottom: 8px; color: var(--ink);
   }
   .reg-text p { font-size: 0.9rem; color: var(--ash); max-width: 480px; line-height: 1.7; }
-  .reg-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+  .reg-badges { display: flex; gap: 14px; flex-wrap: wrap; }
   .badge {
     padding: 10px 20px;
-    background: var(--smoke); border: 1px solid rgba(26,26,26,0.12);
-    border-radius: 3px; font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 0.06em; color: #111111;
+    background: var(--tan); border: 1px solid rgba(58,58,58,0.08);
+    border-radius: 3px; font-size: 0.74rem; font-weight: 700;
+    letter-spacing: 0.06em; color: #6b4e36;
     text-transform: uppercase;
   }
 
   /* ─── ROADMAP & METRICS ────────────────────────────────────── */
-  #roadmap { background: var(--white); }
+  #roadmap { background: var(--paper); }
 
   .metrics-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
     margin-bottom: 80px;
-    background: rgba(26,26,26,0.08);
   }
   .metric-block {
-    padding: 40px 32px; background: var(--white);
-    border-top: 3px solid var(--clay); text-align: center;
+    padding: 36px 28px; background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--sage-deep); border-radius: 6px; text-align: center;
     transition: transform 0.2s;
   }
   .metric-block:hover { transform: translateY(-4px); }
   .metric-num {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem; font-weight: 900; color: #111111;
+    font-size: 2.8rem; font-weight: 900; color: var(--sage-deep);
     line-height: 1;
   }
   .metric-unit { font-size: 1.2rem; vertical-align: super; font-weight: 400; }
@@ -456,7 +495,7 @@
   .timeline { position: relative; padding-left: 0; }
   .timeline::before {
     content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-    width: 1px; background: rgba(26,26,26,0.12); transform: translateX(-50%);
+    width: 1px; background: var(--line); transform: translateX(-50%);
   }
   .timeline-row {
     display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; margin-bottom: 0;
@@ -469,80 +508,87 @@
     gap: 0; padding-top: 36px;
   }
   .tl-dot {
-    width: 16px; height: 16px; background: var(--clay); border-radius: 50%;
-    border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--clay);
+    width: 16px; height: 16px; background: var(--sage-deep); border-radius: 50%;
+    border: 3px solid var(--paper); box-shadow: 0 0 0 2px var(--sage-deep);
     flex-shrink: 0;
   }
-  .tl-line { width: 1px; flex: 1; background: rgba(26,26,26,0.12); min-height: 60px; }
+  .tl-line { width: 1px; flex: 1; background: var(--line); min-height: 60px; }
 
   .tl-phase {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--clay); margin-bottom: 8px;
+    color: var(--sage-deep); margin-bottom: 8px;
   }
   .tl-heading {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; margin-bottom: 10px; color: #111111;
+    font-size: 1.1rem; margin-bottom: 10px; color: var(--ink);
   }
   .tl-body { font-size: 0.82rem; color: var(--ash); line-height: 1.7; }
 
   /* ─── COLLABORATIONS ──────────────────────────────────────── */
-  #collab { background: var(--smoke); padding: 80px 6vw; border-top: 1px solid rgba(26,26,26,0.08); border-bottom: 1px solid rgba(26,26,26,0.08); }
+  #collab { background: var(--panel); padding: 80px 6vw; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .collab-inner { max-width: 1200px; margin: 0 auto; }
   .collab-types {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
     margin-top: 48px;
   }
   .collab-type {
-    padding: 28px 24px;
-    border: 1px solid rgba(26,26,26,0.1);
-    border-radius: 3px;
+    padding: 28px 22px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
     text-align: center;
-    background: var(--white);
-    transition: background 0.2s, border-color 0.2s;
+    background: var(--surface);
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
   }
-  .collab-type:hover { background: var(--smoke); border-color: var(--clay); }
+  .collab-type:hover { background: var(--paper); border-color: var(--sage-deep); transform: translateY(-2px); }
   .collab-type .icon { font-size: 2rem; margin-bottom: 12px; }
-  .collab-type h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: #111111; }
+  .collab-type h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
   .collab-type p { font-size: 0.78rem; color: var(--ash); line-height: 1.6; }
 
   /* ─── TRAINING ────────────────────────────────────────────── */
   #training {
-    background: var(--white);
+    background: var(--paper);
     padding: 80px 6vw;
   }
-  .training-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .training-content .section-title { color: #111111; }
-  .training-content .mono { color: var(--clay); }
-  .training-content .section-eyebrow-line { background: var(--clay); }
+  .training-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .training-content .section-title { color: var(--ink); }
+  .training-content .mono { color: var(--sage-deep); }
+  .training-content .section-eyebrow-line { background: var(--sage-deep); }
   .training-content .section-intro { color: var(--ash); }
 
-  .programs { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .training-image {
+    border-radius: 6px; overflow: hidden; border: 1px solid var(--line);
+    aspect-ratio: 4/3; margin-bottom: 28px;
+  }
+  .training-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .programs { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
   .program-row {
     display: flex; align-items: center; gap: 16px; padding: 16px 20px;
-    background: var(--smoke); border-radius: 3px;
-    border-left: 3px solid var(--clay);
+    background: var(--surface); border-radius: 4px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--sage-deep);
     transition: background 0.2s;
   }
-  .program-row:hover { background: #ececec; }
-  .program-name { font-size: 0.88rem; color: #111111; font-weight: 500; }
+  .program-row:hover { background: var(--panel); }
+  .program-name { font-size: 0.88rem; color: var(--ink); font-weight: 500; }
   .program-detail { font-size: 0.75rem; color: var(--ash); margin-top: 2px; }
   .program-icon { font-size: 1.3rem; }
 
   .training-visual {
-    background: var(--smoke); border: 1px solid rgba(26,26,26,0.1);
-    border-radius: 4px; padding: 40px 36px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 36px 32px;
   }
-  .tv-heading { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #111111; margin-bottom: 24px; }
-  .tv-stat { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.06); }
+  .tv-heading { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 22px; }
+  .tv-stat { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
   .tv-stat:last-child { border-bottom: none; }
   .tv-stat-label { font-size: 0.82rem; color: var(--ash); }
-  .tv-stat-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--clay); }
+  .tv-stat-val { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--sage-deep); }
 
   /* ─── FOOTER ──────────────────────────────────────────────── */
   footer {
-    background: var(--white); padding: 72px 6vw 32px;
-    border-top: 1px solid rgba(26,26,26,0.1);
+    background: var(--panel); padding: 72px 6vw 32px;
+    border-top: 1px solid var(--line);
   }
   .footer-top {
     display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px;
@@ -550,14 +596,14 @@
   }
   .footer-brand img { height: 52px; margin-bottom: 16px; }
   .footer-tagline {
-    font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #111111;
+    font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink);
     line-height: 1.5; margin-bottom: 16px;
   }
   .footer-address { font-size: 0.78rem; color: var(--ash); line-height: 1.8; }
 
   .footer-col h5 {
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--clay); margin-bottom: 20px;
+    text-transform: uppercase; color: var(--sage-deep); margin-bottom: 20px;
   }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 12px; }
@@ -565,11 +611,11 @@
     font-size: 0.82rem; color: var(--ash); text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-col ul li a:hover { color: var(--clay); }
+  .footer-col ul li a:hover { color: var(--sage-deep); }
 
   .footer-bottom {
     max-width: 1200px; margin: 0 auto;
-    padding-top: 28px; border-top: 1px solid rgba(26,26,26,0.08);
+    padding-top: 28px; border-top: 1px solid var(--line);
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
   }
   .footer-bottom p { font-size: 0.72rem; color: var(--ash); }
@@ -591,11 +637,13 @@
     .hero-stats { grid-template-columns: repeat(4, 1fr); }
     .mandate-grid { grid-template-columns: 1fr; }
     .domains-grid { grid-template-columns: repeat(2, 1fr); }
-    .domain-card.featured { grid-column: span 1; }
+    .domain-card.featured { grid-column: span 2; }
     .metrics-row { grid-template-columns: repeat(2, 1fr); }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .training-inner { grid-template-columns: 1fr; }
     .collab-types { grid-template-columns: repeat(2, 1fr); }
+    .infra-layout { grid-template-columns: 1fr; }
+    .infra-image { position: static; aspect-ratio: 16/9; }
   }
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -604,6 +652,7 @@
     .impact-grid { grid-template-columns: 1fr; }
     .lab-grid { grid-template-columns: 1fr; }
     .domains-grid { grid-template-columns: 1fr; }
+    .domain-card.featured { grid-column: span 1; }
     .timeline::before { left: 24px; }
     .timeline-row { grid-template-columns: 48px 1fr; }
     .tl-left { display: none; }
@@ -641,7 +690,7 @@
     <div class="hero-left">
       <div class="hero-eyebrow reveal">
         <div class="hero-eyebrow-line"></div>
-        <span class="mono" style="color:var(--clay)">Sri Sathya Sai Institute of Higher Learning</span>
+        <span class="mono" style="color:var(--sage-deep)">Sri Sathya Sai Institute of Higher Learning</span>
       </div>
       <h1 class="hero-headline reveal reveal-delay-1">
         Where <em>Food Science</em><br>Becomes<br>Food Systems.
@@ -653,24 +702,30 @@
         <a href="#impact" class="btn-primary">Explore Industry Services</a>
         <a href="#infrastructure" class="btn-outline">View Facilities</a>
       </div>
+
+      <div class="hero-stats reveal reveal-delay-3">
+        <div class="stat-item">
+          <div class="stat-num">8<span style="font-size:1.3rem;color:var(--sage-deep)">+</span></div>
+          <div class="stat-label">Flagship Research Domains</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Fully Equipped Laboratories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">₹24L</div>
+          <div class="stat-label">ICMR-Funded Research Grant</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">40<span style="font-size:1.1rem;color:var(--sage-deep)">yr</span></div>
+          <div class="stat-label">Academic Legacy at SSSIHL</div>
+        </div>
+      </div>
     </div>
 
-    <div class="hero-stats reveal reveal-delay-2">
-      <div class="stat-item">
-        <div class="stat-num">8<span style="font-size:1.4rem;color:var(--clay)">+</span></div>
-        <div class="stat-label">Flagship Research Domains</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5</div>
-        <div class="stat-label">Fully Equipped Laboratories</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">₹24L</div>
-        <div class="stat-label">ICMR-Funded Research Grant</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">40<span style="font-size:1.2rem;color:var(--clay)">yr</span></div>
-        <div class="stat-label">Academic Legacy at SSSIHL</div>
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80&auto=format&fit=crop" alt="Assorted grains, millets and pulses in bowls">
       </div>
     </div>
   </div>
@@ -687,7 +742,7 @@
     <div class="section-header">
       <div class="section-eyebrow reveal">
         <div class="section-eyebrow-line"></div>
-        <span class="mono" style="color:var(--clay)">The Mandate</span>
+        <span class="mono" style="color:var(--sage-deep)">The Mandate</span>
       </div>
     </div>
 
@@ -702,6 +757,9 @@
         <p class="mandate-sub reveal reveal-delay-2" style="margin-top:16px">
           Our work cuts across three intersecting priorities: preserving the nutritional integrity of raw ingredients during processing, extending shelf life without compromising safety, and supporting the enterprises — small farms, food startups, and established processors — who need that science in a form they can actually use.
         </p>
+        <div class="mandate-image reveal reveal-delay-2">
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6f519b?w=900&q=80&auto=format&fit=crop" alt="Researcher examining grain samples in a laboratory">
+        </div>
       </div>
 
       <div class="mandate-pillars">
@@ -754,11 +812,15 @@
 
     <div class="domains-grid reveal reveal-delay-1">
       <div class="domain-card featured">
-        <div class="domain-num">01</div>
-        <div class="domain-icon"></div>
-        <div class="domain-title">Millet & Ancient Grain Technology</div>
-        <div class="domain-desc">Decortication, flaking, extrusion, and fortification protocols for sorghum, foxtail millet, ragi, and heritage varieties. Includes bioavailability mapping and anti-nutritional factor reduction studies.</div>
-        <span class="domain-tag">Core Domain</span>
+        <div class="featured-image">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=1000&q=80&auto=format&fit=crop" alt="Foxtail millet and ancient grains close up">
+        </div>
+        <div class="featured-content">
+          <div class="domain-num">01</div>
+          <div class="domain-title">Millet & Ancient Grain Technology</div>
+          <div class="domain-desc">Decortication, flaking, extrusion, and fortification protocols for sorghum, foxtail millet, ragi, and heritage varieties. Includes bioavailability mapping and anti-nutritional factor reduction studies.</div>
+          <span class="domain-tag">Core Domain</span>
+        </div>
       </div>
       <div class="domain-card">
         <div class="domain-num">02</div>
@@ -827,132 +889,140 @@
       </p>
     </div>
 
-    <div class="infra-tabs reveal">
-      <button class="tab-btn active" onclick="switchTab(event,'pilot')">Pilot-Scale Processing</button>
-      <button class="tab-btn" onclick="switchTab(event,'labs')">Analytical Laboratories</button>
-    </div>
+    <div class="infra-layout">
+      <div>
+        <div class="infra-tabs reveal">
+          <button class="tab-btn active" onclick="switchTab(event,'pilot')">Pilot-Scale Processing</button>
+          <button class="tab-btn" onclick="switchTab(event,'labs')">Analytical Laboratories</button>
+        </div>
 
-    <div id="pilot" class="tab-panel active reveal reveal-delay-1">
-      <div class="equipment-grid">
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Extruder</div><div class="equip-sub">Twin-screw extrusion for puffed & textured products</div></div>
+        <div id="pilot" class="tab-panel active reveal reveal-delay-1">
+          <div class="equipment-grid">
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Extruder</div><div class="equip-sub">Twin-screw extrusion for puffed & textured products</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Ribbon Blender</div><div class="equip-sub">Homogeneous dry mixing at pilot scale</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Flaking Machine</div><div class="equip-sub">Grain flaking for breakfast and instant formats</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Pulverizer</div><div class="equip-sub">Fine milling to controlled particle sizes</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Rotary Dryer</div><div class="equip-sub">Controlled moisture reduction for shelf stability</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Roaster</div><div class="equip-sub">Dry heat treatment for flavour & microbial control</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Homogenizer</div><div class="equip-sub">Emulsion stability and particle size reduction</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Pasteurizer</div><div class="equip-sub">Thermal processing for dairy and liquid foods</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Lyophilizer</div><div class="equip-sub">Freeze-drying for high-value ingredient preservation</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Packaging Machine</div><div class="equip-sub">Heat sealing and vacuum packaging lines</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Solar Dryer</div><div class="equip-sub">Sustainable dehydration for F&V applications</div></div>
+            </div>
+            <div class="equip-item">
+              <div class="equip-dot"></div>
+              <div><div class="equip-name">Bakery Equipment Suite</div><div class="equip-sub">OTG, convection oven, mixer, proofing chamber</div></div>
+            </div>
+          </div>
         </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Ribbon Blender</div><div class="equip-sub">Homogeneous dry mixing at pilot scale</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Flaking Machine</div><div class="equip-sub">Grain flaking for breakfast and instant formats</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Pulverizer</div><div class="equip-sub">Fine milling to controlled particle sizes</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Rotary Dryer</div><div class="equip-sub">Controlled moisture reduction for shelf stability</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Roaster</div><div class="equip-sub">Dry heat treatment for flavour & microbial control</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Homogenizer</div><div class="equip-sub">Emulsion stability and particle size reduction</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Pasteurizer</div><div class="equip-sub">Thermal processing for dairy and liquid foods</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Lyophilizer</div><div class="equip-sub">Freeze-drying for high-value ingredient preservation</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Packaging Machine</div><div class="equip-sub">Heat sealing and vacuum packaging lines</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Solar Dryer</div><div class="equip-sub">Sustainable dehydration for F&V applications</div></div>
-        </div>
-        <div class="equip-item">
-          <div class="equip-dot"></div>
-          <div><div class="equip-name">Bakery Equipment Suite</div><div class="equip-sub">OTG, convection oven, mixer, proofing chamber</div></div>
+
+        <div id="labs" class="tab-panel">
+          <div class="lab-grid">
+            <div class="lab-card reveal">
+              <h4>Food Chemistry & Analytical Laboratory</h4>
+              <p>Proximate composition, mineral profiling, enzyme assays, fat extraction, protein analysis, and spectrophotometric characterisation of food matrices.</p>
+              <div class="lab-instruments">
+                <span class="chip">UV-Vis Spectrophotometer</span>
+                <span class="chip">Kjeltron Protein Unit</span>
+                <span class="chip">Soxtron Fat Extractor</span>
+                <span class="chip">Fibertron Fiber Analyser</span>
+                <span class="chip">Rotary Evaporator</span>
+                <span class="chip">Muffle Furnace</span>
+                <span class="chip">Varioskan Lux Reader</span>
+              </div>
+            </div>
+            <div class="lab-card reveal reveal-delay-1">
+              <h4>Food Microbiology Laboratory</h4>
+              <p>Total plate counts, pathogen detection, HACCP verification sampling, spoilage organism identification, and shelf-life challenge studies.</p>
+              <div class="lab-instruments">
+                <span class="chip">Laminar Air Flow</span>
+                <span class="chip">BOD Incubator</span>
+                <span class="chip">Autoclave</span>
+                <span class="chip">Olympus Trinocular Scope</span>
+                <span class="chip">Colony Counter</span>
+              </div>
+            </div>
+            <div class="lab-card reveal reveal-delay-2">
+              <h4>Food Quality Control Laboratory</h4>
+              <p>Rheological profiling, water activity measurement, colour analysis, headspace gas composition, and texture determination for product QC documentation.</p>
+              <div class="lab-instruments">
+                <span class="chip">Water Activity Meter</span>
+                <span class="chip">Brookfield Viscometer</span>
+                <span class="chip">Dansensor Headspace</span>
+                <span class="chip">Konica Minolta Colour</span>
+                <span class="chip">Bostwick Consistometer</span>
+              </div>
+            </div>
+            <div class="lab-card reveal reveal-delay-3">
+              <h4>Food Processing & Technology Laboratory</h4>
+              <p>Dehydration studies, oil expression, sieve analysis, penetration testing, and applied processing experiments at gram-to-kilogram scale.</p>
+              <div class="lab-instruments">
+                <span class="chip">Ezidri Dehydrator</span>
+                <span class="chip">Gyratory Sieve Shaker</span>
+                <span class="chip">Piteba Oil Expeller</span>
+                <span class="chip">Gerber Centrifuge</span>
+                <span class="chip">Penetrometer</span>
+              </div>
+            </div>
+            <div class="lab-card reveal">
+              <h4>Sensory Evaluation & Product Development Kitchen</h4>
+              <p>Structured consumer panel trials, triangle tests, hedonic scaling, and iterative product development in a controlled, commercial-grade kitchen setting.</p>
+              <div class="lab-instruments">
+                <span class="chip">Induction & Gas Ranges</span>
+                <span class="chip">Food Processors</span>
+                <span class="chip">Commercial Blenders</span>
+                <span class="chip">Precision Balances</span>
+              </div>
+            </div>
+            <div class="lab-card reveal reveal-delay-1">
+              <h4>Nutritional Biochemistry Laboratory</h4>
+              <p>In-vitro bioavailability assays, antioxidant activity, glycaemic index profiling, and metabolomic characterisation of food bioactives.</p>
+              <div class="lab-instruments">
+                <span class="chip">Fluorimeter</span>
+                <span class="chip">Semi-auto Biochemistry Analyser</span>
+                <span class="chip">Tissue Homogenizer</span>
+                <span class="chip">Microcentrifuge</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div id="labs" class="tab-panel">
-      <div class="lab-grid">
-        <div class="lab-card reveal">
-          <h4>Food Chemistry & Analytical Laboratory</h4>
-          <p>Proximate composition, mineral profiling, enzyme assays, fat extraction, protein analysis, and spectrophotometric characterisation of food matrices.</p>
-          <div class="lab-instruments">
-            <span class="chip">UV-Vis Spectrophotometer</span>
-            <span class="chip">Kjeltron Protein Unit</span>
-            <span class="chip">Soxtron Fat Extractor</span>
-            <span class="chip">Fibertron Fiber Analyser</span>
-            <span class="chip">Rotary Evaporator</span>
-            <span class="chip">Muffle Furnace</span>
-            <span class="chip">Varioskan Lux Reader</span>
-          </div>
-        </div>
-        <div class="lab-card reveal reveal-delay-1">
-          <h4>Food Microbiology Laboratory</h4>
-          <p>Total plate counts, pathogen detection, HACCP verification sampling, spoilage organism identification, and shelf-life challenge studies.</p>
-          <div class="lab-instruments">
-            <span class="chip">Laminar Air Flow</span>
-            <span class="chip">BOD Incubator</span>
-            <span class="chip">Autoclave</span>
-            <span class="chip">Olympus Trinocular Scope</span>
-            <span class="chip">Colony Counter</span>
-          </div>
-        </div>
-        <div class="lab-card reveal reveal-delay-2">
-          <h4>Food Quality Control Laboratory</h4>
-          <p>Rheological profiling, water activity measurement, colour analysis, headspace gas composition, and texture determination for product QC documentation.</p>
-          <div class="lab-instruments">
-            <span class="chip">Water Activity Meter</span>
-            <span class="chip">Brookfield Viscometer</span>
-            <span class="chip">Dansensor Headspace</span>
-            <span class="chip">Konica Minolta Colour</span>
-            <span class="chip">Bostwick Consistometer</span>
-          </div>
-        </div>
-        <div class="lab-card reveal reveal-delay-3">
-          <h4>Food Processing & Technology Laboratory</h4>
-          <p>Dehydration studies, oil expression, sieve analysis, penetration testing, and applied processing experiments at gram-to-kilogram scale.</p>
-          <div class="lab-instruments">
-            <span class="chip">Ezidri Dehydrator</span>
-            <span class="chip">Gyratory Sieve Shaker</span>
-            <span class="chip">Piteba Oil Expeller</span>
-            <span class="chip">Gerber Centrifuge</span>
-            <span class="chip">Penetrometer</span>
-          </div>
-        </div>
-        <div class="lab-card reveal">
-          <h4>Sensory Evaluation & Product Development Kitchen</h4>
-          <p>Structured consumer panel trials, triangle tests, hedonic scaling, and iterative product development in a controlled, commercial-grade kitchen setting.</p>
-          <div class="lab-instruments">
-            <span class="chip">Induction & Gas Ranges</span>
-            <span class="chip">Food Processors</span>
-            <span class="chip">Commercial Blenders</span>
-            <span class="chip">Precision Balances</span>
-          </div>
-        </div>
-        <div class="lab-card reveal reveal-delay-1">
-          <h4>Nutritional Biochemistry Laboratory</h4>
-          <p>In-vitro bioavailability assays, antioxidant activity, glycaemic index profiling, and metabolomic characterisation of food bioactives.</p>
-          <div class="lab-instruments">
-            <span class="chip">Fluorimeter</span>
-            <span class="chip">Semi-auto Biochemistry Analyser</span>
-            <span class="chip">Tissue Homogenizer</span>
-            <span class="chip">Microcentrifuge</span>
-          </div>
-        </div>
+      <div class="infra-image reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1581093458791-9d42e3c7e117?w=800&q=80&auto=format&fit=crop" alt="Laboratory glassware and analytical equipment">
       </div>
     </div>
   </div>
@@ -1214,6 +1284,9 @@
     </div>
 
     <div class="training-visual reveal reveal-delay-2">
+      <div class="training-image">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80&auto=format&fit=crop" alt="Food science students in a training workshop">
+      </div>
       <div class="tv-heading">Target Capacity — Year 5</div>
       <div class="tv-stat">
         <span class="tv-stat-label">Annual Training Throughput</span>
@@ -1235,7 +1308,7 @@
         <span class="tv-stat-label">Target FPO Partners Trained</span>
         <span class="tv-stat-val">25+ organisations</span>
       </div>
-      <div style="margin-top:28px; padding:20px; background:var(--white); border-radius:3px; border-left:3px solid var(--clay); border:1px solid rgba(26,26,26,0.08)">
+      <div style="margin-top:24px; padding:18px; background:var(--panel); border-radius:4px; border-left:3px solid var(--sage-deep)">
         <div style="font-size:0.78rem;color:var(--ash);line-height:1.7">The department currently offers M.Sc. and Ph.D. programmes in Food & Nutritional Sciences, with active doctoral research scholars publishing in peer-reviewed journals and qualifying in UGC-NET.</div>
       </div>
     </div>
@@ -1251,8 +1324,8 @@
       <p class="footer-address">
         Department of Food & Nutritional Sciences<br>
         Sri Sathya Sai Institute of Higher Learning<br>
-        Prasanthi Nilayam, Puttaparthi<br>
-        Andhra Pradesh – 515134, India
+        Anantapur<br>
+        Andhra Pradesh – 515001, India
       </p>
     </div>
 
@@ -1323,10 +1396,10 @@
     const nav = document.getElementById('navbar');
     if (window.scrollY > 60) {
       nav.style.height = '56px';
-      nav.style.borderBottomColor = 'rgba(26,26,26,0.2)';
+      nav.style.borderBottomColor = 'rgba(58,58,58,0.18)';
     } else {
       nav.style.height = '68px';
-      nav.style.borderBottomColor = 'rgba(26,26,26,0.12)';
+      nav.style.borderBottomColor = 'rgba(58,58,58,0.12)';
     }
   }, { passive: true });
 
